@@ -24,8 +24,23 @@ class ESignServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $package_root = realpath(__DIR__.'/../')."/";
+
+        // Publishing
+		$this->publishes([
+			$package_root.'config/docusign.php' =>  config_path('docusign.php'),
+		], 'docusign');
+
+        // Merge our configuration
+		$this->mergeConfigFrom(
+			$package_root.'config/docusign.php',
+			'docusign'
+		);
+
         $this->app->singleton(ApiClient::class, function () {
-            return new ApiClient();
+            return new ApiClient([
+
+            ]);
         });
     }
 }
