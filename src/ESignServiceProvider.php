@@ -38,9 +38,7 @@ class ESignServiceProvider extends ServiceProvider
 		);
 
         $this->app->singleton(ApiClient::class, function () {
-            return new ApiClient([
-
-            ]);
+            return new ApiClient();
         });
     }
 }
